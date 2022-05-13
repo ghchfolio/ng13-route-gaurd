@@ -5,8 +5,8 @@
             <a routerLink="/veggies" class="mx-2">Veggies</a>
         </div>
 
-        <div>
-            <a routerLink="/signed-out" class="mx-2">Sign in</a>
+        <div *ngIf="signedIn">
+            <a routerLink="/login" class="mx-2">Sign out</a>
         </div>
     </nav>
 </header>

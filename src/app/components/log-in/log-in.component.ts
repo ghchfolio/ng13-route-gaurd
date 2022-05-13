@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-log-in',
@@ -8,18 +9,11 @@ import { NgForm } from '@angular/forms';
 })
 export class LogInComponent implements OnInit {
 
-    constructor() { }
+    constructor(private us: UserService) { }
 
-    isLoggedIn?: boolean;
-    user = {
-        email: '',
-        password: ''
-    };
-
-    ngOnInit(): void { }
+    ngOnInit() { }
 
     logIn(f: any) {
-        // if (form.userName === 'test' && form.userPassword === 'test') this.isLoggedIn = true;
-        console.log(f)
+        this.us.signIn()
     }
 }

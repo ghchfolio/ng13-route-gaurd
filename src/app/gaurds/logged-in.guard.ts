@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoggedInGuard implements CanActivate {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private us: UserService) { }
+
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        console.log('canActivate');
-        alert('You are not logged in.');
-        this.router.navigate(['login']);
+        if (!this.us.isSignedIn()) {
+            window.alert('You are not logged in.');
+            return false;
+        }
         return true;
     }
 

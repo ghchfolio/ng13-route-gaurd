@@ -10,6 +10,8 @@ import { VeggiesComponent } from './components/veggies/veggies.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { ResourcesComponent } from './components/resources/resources.component';
 import { LoggedInGuard } from './gaurds/logged-in.guard';
+import { LoggedInComponent } from './components/logged-in/logged-in.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +20,9 @@ import { LoggedInGuard } from './gaurds/logged-in.guard';
         FruitsComponent,
         VeggiesComponent,
         LogInComponent,
-        ResourcesComponent
+        ResourcesComponent,
+        LoggedInComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,

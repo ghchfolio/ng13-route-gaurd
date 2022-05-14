@@ -1,12 +1,12 @@
-<header>
+<header *ngIf="signedIn">
     <nav class="d-md-flex justify-content-md-between">
         <div>
             <a routerLink="/fruits" class="mx-2">Fruits</a>
             <a routerLink="/veggies" class="mx-2">Veggies</a>
         </div>
 
-        <div *ngIf="signedIn">
-            <a routerLink="/login" class="mx-2">Sign out</a>
+        <div>
+            <a href="javascript:void(0)" (click)="signOut()" class="mx-2">Sign out</a>
         </div>
     </nav>
 </header>

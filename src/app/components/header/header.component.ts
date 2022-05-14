@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -7,11 +8,27 @@ import { UserService } from 'src/app/services/user.service';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    signedIn: boolean | undefined;
+
+    sub = new Subscription();
+    signedIn = false;
+
     constructor(private us: UserService) { }
 
     ngOnInit(): void {
-        this.signedIn = this.us.isSignedIn();
+        this.sub = this.us.signedIn$$.subscribe(res => {
+            console.log(this.signedIn);
+            this.signedIn = res;
+        })
     }
 
+    signIn() {
+        this.us.signIn();
+    }
+    signOut() {
+        this.us.signOut();
+    }
+
+    onDestroy() {
+        this.sub.unsubscribe();
+    }
 }

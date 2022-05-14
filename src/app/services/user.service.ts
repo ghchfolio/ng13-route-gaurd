@@ -1,27 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    private signedIn = false;
+    private bsubj = new BehaviorSubject<boolean>(false);
+    signedIn$$ = this.bsubj.asObservable();
 
     constructor(private router: Router) { }
 
-    isSignedIn() {
-        return this.signedIn;
-    }
-
     signIn() {
-        this.signedIn = true;
-        this.router.navigate(['/fruits'])
+        this.bsubj.next(true);
+        this.router.navigate(['/home'])
     }
 
     signOut() {
-        this.signedIn = false;
-        return this.signedIn
+        this.bsubj.next(false);
+        this.router.navigate(['/login']);
     }
 }

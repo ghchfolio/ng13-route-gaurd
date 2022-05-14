@@ -8,10 +8,17 @@ import { UserService } from '../services/user.service';
 })
 export class LoggedInGuard implements CanActivate {
 
-    constructor(private router: Router, private us: UserService) { }
+    sub = new Subscription();
+    signedIn?: boolean;
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        if (!this.us.isSignedIn()) {
+    constructor(private router: Router, private us: UserService) {
+        this.sub = this.us.signedIn$$.subscribe(res => {
+            this.signedIn = res;
+        });
+    }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        if (!this.signedIn) {
             window.alert('You are not logged in.');
             return false;
         }

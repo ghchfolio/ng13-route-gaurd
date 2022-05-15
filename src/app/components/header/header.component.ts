@@ -15,15 +15,13 @@ export class HeaderComponent implements OnInit {
     constructor(private us: UserService) { }
 
     ngOnInit(): void {
-        this.sub = this.us.signedIn$$.subscribe(res => {
-            console.log(this.signedIn);
-            this.signedIn = res;
-        })
+        this.sub = this.us.signedIn$.subscribe(res => this.signedIn = res);
     }
 
     signIn() {
         this.us.signIn();
     }
+
     signOut() {
         this.us.signOut();
     }

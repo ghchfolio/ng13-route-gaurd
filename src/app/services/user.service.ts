@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, from, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +8,7 @@ import { BehaviorSubject, from, of } from 'rxjs';
 export class UserService {
 
     private bsubj = new BehaviorSubject<boolean>(false);
-    signedIn$$ = this.bsubj.asObservable();
+    signedIn$ = this.bsubj.asObservable();
 
     constructor(private router: Router) { }
 

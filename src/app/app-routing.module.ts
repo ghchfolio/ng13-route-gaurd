@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: 'veggies', component: VeggiesComponent, canActivate: [LoggedInGuard] },
     { path: 'login', component: LogInComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: '**', component: FruitsComponent }
+    { path: '**', component: LogInComponent }
 ];
 
 @NgModule({

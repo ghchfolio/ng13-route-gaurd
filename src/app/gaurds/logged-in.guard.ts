@@ -11,19 +11,16 @@ export class LoggedInGuard implements CanActivate {
     sub = new Subscription();
     signedIn?: boolean;
 
-    constructor(private router: Router, private us: UserService) {
-        this.sub = this.us.signedIn$$.subscribe(res => {
-            this.signedIn = res;
-        });
-    }
+    constructor(private router: Router, private us: UserService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.signedIn) {
-            window.alert('You are not logged in.');
-            return false;
-        }
+        this.sub = this.us.signedIn$.subscribe(res => this.signedIn = res);
+        if (!this.signedIn) return false;
         return true;
     }
 
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 }
 // INFO https://www.tektutorialshub.com/angular/angular-route-guards/#angular-route-guards

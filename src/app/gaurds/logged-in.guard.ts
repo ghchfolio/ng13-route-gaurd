@@ -11,10 +11,10 @@ export class LoggedInGuard implements CanActivate {
     sub = this.us.signedIn$.subscribe(res => this.signedIn = res);
     signedIn?: boolean;
 
-    constructor(private router: Router, private us: UserService) { }
+    constructor(private us: UserService) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.signedIn) return false;
+    canActivate() {
+        if (!this.signedIn) this.us.signOut();
         return true;
     }
 
